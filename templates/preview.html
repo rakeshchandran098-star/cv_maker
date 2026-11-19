@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}CV Preview{% endblock %}
+{% block content %}
+<div class="preview-heading">
+  <div><p class="eyebrow">YOUR CV PREVIEW</p><h1>Looking good!</h1><p class="muted">Review your details before downloading the PDF.</p></div>
+  <a class="button secondary" href="{{ url_for('index') }}">← Edit details</a>
+</div>
+<article class="cv-sheet">
+  <h1>{{ data.full_name }}</h1>
+  <p class="contact">{{ data.email }} · {{ data.phone }}{% if data.location %} · {{ data.location }}{% endif %}{% if data.linkedin %} · {{ data.linkedin }}{% endif %}</p>
+  {% macro section(title, value) %}
+    {% if value %}
+      <section class="cv-section"><h2>{{ title }}</h2><div class="cv-text">{{ value }}</div></section>
+    {% endif %}
+  {% endmacro %}
+  {{ section("Career Objective / Professional Summary", data.career_objective) }}
+  {{ section("Education", data.education) }}
+  {{ section("Work Experience", data.experience) }}
+  {{ section("Projects", data.projects) }}
+  {{ section("Technical Skills", data.skills) }}
+  {{ section("Certifications", data.certifications) }}
+  {{ section("Achievements", data.achievements) }}
+  {{ section("Languages", data.languages) }}
+</article>
+<form method="POST" action="{{ url_for('download') }}" class="download-form">
+  {% for key, value in data.items() %}<input type="hidden" name="{{ key }}" value="{{ value }}">{% endfor %}
+  <button class="button primary" type="submit">⬇ Download CV as PDF</button>
+</form>
+{% endblock %}

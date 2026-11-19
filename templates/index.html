@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Create Your CV{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">FREE CV BUILDER</p>
+    <h1>Create your professional CV</h1>
+    <p class="muted">Enter your information below. Preview it and download a clean PDF CV.</p>
+  </div>
+  <div class="hero-badge">PDF<br><strong>Ready</strong></div>
+</section>
+
+<form method="POST" class="form-card" action="{{ url_for('index') }}">
+  <div class="section-title"><span>01</span><div><h2>Personal details</h2><p>How employers can contact you</p></div></div>
+  <div class="grid">
+    <label>Full name *<input name="full_name" required placeholder="e.g. Rakesh Chandran" value="{{ data.get('full_name','') }}"></label>
+    <label>Email address *<input type="email" name="email" required placeholder="name@example.com" value="{{ data.get('email','') }}"></label>
+    <label>Phone number *<input name="phone" required placeholder="+91 98765 43210" value="{{ data.get('phone','') }}"></label>
+    <label>Location<input name="location" placeholder="Kollam, Kerala" value="{{ data.get('location','') }}"></label>
+    <label class="full">LinkedIn profile<input name="linkedin" placeholder="linkedin.com/in/your-profile" value="{{ data.get('linkedin','') }}"></label>
+  </div>
+
+  <div class="section-title"><span>02</span><div><h2>Professional summary</h2><p>Introduce your career goal and strengths</p></div></div>
+  <label>Career objective / summary *<textarea name="career_objective" required rows="4" placeholder="Write 2–4 sentences about your background, skills and the role you are seeking.">{{ data.get('career_objective','') }}</textarea></label>
+
+  <div class="section-title"><span>03</span><div><h2>Education</h2><p>One qualification per line</p></div></div>
+  <label>Education<textarea name="education" rows="4" placeholder="B.Com in Co-operation — College / University — Year&#10;Higher Secondary — School — Year">{{ data.get('education','') }}</textarea></label>
+
+  <div class="section-title"><span>04</span><div><h2>Work experience</h2><p>Include internships, jobs or relevant training</p></div></div>
+  <label>Experience<textarea name="experience" rows="4" placeholder="Job title — Company — Dates&#10;• Responsibility or achievement&#10;• Tools and skills used">{{ data.get('experience','') }}</textarea></label>
+
+  <div class="section-title"><span>05</span><div><h2>Projects</h2><p>Highlight practical work</p></div></div>
+  <label>Projects<textarea name="projects" rows="4" placeholder="Project name — Tools used&#10;• What you built and what it achieved">{{ data.get('projects','') }}</textarea></label>
+
+  <div class="section-title"><span>06</span><div><h2>Skills and additional details</h2><p>Make relevant strengths easy to find</p></div></div>
+  <div class="grid">
+    <label class="full">Technical / professional skills<textarea name="skills" rows="3" placeholder="Excel, SQL, Python, Power BI, Tableau">{{ data.get('skills','') }}</textarea></label>
+    <label>Certifications<textarea name="certifications" rows="3" placeholder="Course or certificate — Institution — Year">{{ data.get('certifications','') }}</textarea></label>
+    <label>Achievements<textarea name="achievements" rows="3" placeholder="Awards, accomplishments or notable results">{{ data.get('achievements','') }}</textarea></label>
+    <label class="full">Languages<textarea name="languages" rows="2" placeholder="English, Malayalam">{{ data.get('languages','') }}</textarea></label>
+  </div>
+  <div class="form-actions">
+    <p>* Required fields</p>
+    <button class="button primary" type="submit">Preview my CV →</button>
+  </div>
+</form>
+{% endblock %}
